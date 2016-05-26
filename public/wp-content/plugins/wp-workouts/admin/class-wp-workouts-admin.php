@@ -109,14 +109,7 @@ class Wp_Workouts_Admin {
 
 	public function add_plugin_admin_menu() {
 
-		/*
-		 * Add a settings page for this plugin to the Settings menu.
-		 *
-		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
-		 *
-		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 */
+
 		add_menu_page( 'Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
 		);
 
