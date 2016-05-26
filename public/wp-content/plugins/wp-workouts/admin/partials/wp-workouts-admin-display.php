@@ -27,7 +27,7 @@
 		<table class="widefat">
 			<!--Table Headers-->
 			<tr>
-				<th>Exercise</th>
+				<th><strong>Exercise</strong></th>
 				<td><input type="text" value="Name" class="all-options" /></td></td>
 			</tr>
 			<tr>
