@@ -110,7 +110,7 @@ class Wp_Workouts_Admin {
 	public function add_plugin_admin_menu() {
 
 
-		add_menu_page( 'Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
+		add_options_page( 'Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
 		);
 
 	}
@@ -142,6 +142,40 @@ class Wp_Workouts_Admin {
 	public function display_plugin_setup_page() {
 		include_once( 'partials/wp-workouts-admin-display.php' );
 	}
+
+
+
+	/**
+	 *
+	 * saving/updating data from wp-workouts
+	 *
+	 **/
+	public function options_update() {
+		register_setting( $this->plugin_name, $this->plugin_name, array($this, 'validate') );
+	}
+
+	/**
+	 *
+	 * validate and sanitize user input
+	 *
+	 **/
+	public function validate($input) {
+		// All text fields inputs
+		$valid = array();
+
+		$valid['name'] = (isset($input['name']) && !empty($input['name'])) ? sanitize_text_field($input['name']) : '';
+		if (  empty($valid['name']) ) {
+			add_settings_error(
+					'name',                     // Setting title
+					'name_texterror',            // Error ID
+					__('Please enter a name', $this->plugin_name),     // Error message
+					'error'                         // Type of message
+			);
+		}
+
+		return $valid;
+	}
+
 
 }
 

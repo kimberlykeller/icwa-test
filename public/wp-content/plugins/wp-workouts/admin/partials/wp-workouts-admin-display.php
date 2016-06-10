@@ -20,7 +20,23 @@
 	<h2><?php echo esc_html(get_admin_page_title()); ?></h2>
 	<br />
 
-	<form method="post" name="workouts" action="workouts.php">
+	<form method="post" name="options" action="options.php">
+
+		<?php
+		//Grab all options
+		$options = get_option($this->plugin_name);
+
+		// Cleanup
+		$name = $options['name'];
+
+
+		?>
+
+		<?php
+		settings_fields($this->plugin_name);
+		do_settings_sections($this->plugin_name);
+		?>
+
 
 		<!--table with rows for name, reps, set, percentage -->
 
@@ -28,7 +44,17 @@
 			<!--Table Headers-->
 			<tr>
 				<th><strong>Exercise</strong></th>
-				<td><input type="text" value="Name" class="all-options" /></td></td>
+				<td>
+					<fieldset>
+						<legend class="screen-reader-text"><span><?php _e('Add exercise', $this->plugin_name); ?></span></legend>
+						<label for="<?php echo $this->plugin_name; ?>-name">
+							<input type="text" id="<?php echo $this->plugin_name;?>-name" name="<?php echo $this->plugin_name; ?>[name]" value="<?php if(!empty($name)) echo $name; ?>" />
+							<span><?php esc_attr_e('Add exercise', $this->plugin_name); ?></span>
+						</label>
+					</fieldset>
+
+				</td>
+
 			</tr>
 			<tr>
 				<th>Set</th>
@@ -38,14 +64,14 @@
 			</tr>
 			<!--Table form fields-->
 			<tr>
-				<td><input type="text" value="Set" class="small-text" /></td>
-				<td><input type="text" value="Reps" class="small-text" /></td>
-				<td><input type="text" value="" class="small-text" /></td>
+				<td><input type="text" value="Set" class="small-text" id="<?php echo $this->plugin_name; ?>-set" /></td>
+				<td><input type="text" value="Reps" class="small-text" id="<?php echo $this->plugin_name; ?>-reps" /></td>
+				<td><input type="text" value="" class="small-text" id="<?php echo $this->plugin_name; ?>-percentage" /></td>
 
 				<td><select name="exercise" id="exercise">
-						<option selected="selected" value="">Clean & Jerk</option>
-						<option value="">Snatch</option>
-						<option value="">Back Squat</option>
+						<option selected="selected" value="" id="<?php echo $this->plugin_name; ?>-cleanjerk">Clean & Jerk</option>
+						<option value="" id="<?php echo $this->plugin_name; ?>-snatch">Snatch</option>
+						<option value="" id="<?php echo $this->plugin_name; ?>-backsquat">Back Squat</option>
 					</select>
 				</td>
 			</tr>
@@ -56,6 +82,8 @@
 
 
 		<?php submit_button('Add Exercise', 'primary','submit', TRUE); ?>
+
+		<?php submit_button('Save all changes', 'primary','submit', TRUE); ?>
 
 	</form>
 
