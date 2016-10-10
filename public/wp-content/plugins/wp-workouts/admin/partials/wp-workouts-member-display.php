@@ -17,3 +17,20 @@
 
 
 <h1>boop</h1>
+
+<?php
+//Grab all options
+$options = get_option($this->plugin_name);
+
+// Workout fields
+$name = $options['name'];
+
+
+?>
+
+<?php
+settings_fields($this->plugin_name);
+do_settings_sections($this->plugin_name);
+?>
+
+<p><?php echo $this->plugin_name;?></p>

@@ -107,11 +107,14 @@ class Wp_Workouts_Admin {
 	 * @since    1.0.0
 	 */
 
+
 	public function add_plugin_admin_menu() {
 
 
-		add_options_page( 'Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
-		);
+//		add_options_page( 'Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page')
+//		);
+
+		add_menu_page('Custom Workouts', 'Workouts', 'manage_options', $this->plugin_name, array($this, 'display_plugin_setup_page'), 'dashicons-admin-generic');
 
 	}
 
@@ -141,8 +144,8 @@ class Wp_Workouts_Admin {
 
 	public function display_plugin_setup_page() {
 		include_once( 'partials/wp-workouts-admin-display.php' );
-	}
 
+	}
 
 
 	/**
@@ -173,10 +176,51 @@ class Wp_Workouts_Admin {
 			);
 		}
 
+		$valid['reps'] = (isset($input['reps']) && !empty($input['name'])) ? sanitize_text_field($input['reps']) : '';
+		if (  empty($valid['reps']) ) {
+			add_settings_error(
+					'reps',                     // Setting title
+					'reps_texterror',            // Error ID
+					__('Please enter the number of reps', $this->plugin_name),     // Error message
+					'error'                         // Type of message
+			);
+		}
+
+		$valid['set'] = (isset($input['set']) && !empty($input['set'])) ? sanitize_text_field($input['set']) : '';
+		if (  empty($valid['set']) ) {
+			add_settings_error(
+					'set',                     // Setting title
+					'set_texterror',            // Error ID
+					__('Please enter the set', $this->plugin_name),     // Error message
+					'error'                         // Type of message
+			);
+		}
+
+
+
 		return $valid;
 	}
 
 
 }
+
+add_action( 'admin_menu', 'my_admin_menu' );
+
+function my_admin_menu() {
+	add_menu_page( 'My Workouts', 'My Workouts', 'subscriber', 'partials/wp-workouts-member-display.php', 'display_plugin_member_page', 'dashicons-tickets', 6  );
+
+}
+
+/**
+ * Render the settings page for this plugin.
+ *
+ * @since    1.0.0
+ */
+
+function display_plugin_member_page() {
+	include_once( 'partials/wp-workouts-member-display.php' );
+}
+
+
 
 
