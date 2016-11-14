@@ -1,7 +1,18 @@
 <?php /**
+ * main content for workouts
  * acf fields for workout displayed here
  * TODO: abstract field calculations out to main functions file
  */
+?>
+
+
+<?php while ( have_posts() ) : the_post();
+
+	// Include the single post content template.
+	the_content();
+
+	// End of the loop.
+endwhile;
 ?>
 
 <?php if( have_rows('movements') ): ?>

@@ -4,46 +4,19 @@ get_header();
 ?>
 
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<?php if ( have_posts() ) : ?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<div class="entry-content">
+		<h1>All Workouts</h1>
 
-					<?php
+	<?php /* Start the Loop */ ?>
+	<?php while ( have_posts() ) : the_post();
 
-					$args = [
-						'post_type'      => 'workout',
-						'posts_per_page' => 10,
-					];
+		does_user_have_access_archive();
 
-					$loop = new WP_Query($args);
 
-					while ($loop->have_posts()) {
+ 		endwhile; ?>
 
-						$loop->the_post();
-						?>
-
-						<div class="entry-content">
-
-							<?php if ( current_user_can( 'read_post', $post->ID ) ) : ?>
-							<?php the_title(); ?>
-						</div>
-
-						<?php	else :
-
-							// no layouts found
-
-						endif;
-
-						?>
-					<?php	} ?>
-				</div><!-- .entry-content -->
-			</article><!-- #post-## -->
-
-		</main><!-- .site-main -->
-
-	</div><!-- .content-area -->
+		<?php endif; ?>
 
 
 <?php wp_footer(); ?>

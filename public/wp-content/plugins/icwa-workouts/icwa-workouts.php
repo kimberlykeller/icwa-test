@@ -7,6 +7,15 @@ Version: 1.0
 Author URI: http://www.kimberlyannkeller.com
 */
 
+
+/**
+ * TODO: Combine permissions check functions so that there is only one check function
+ * currently we check for the same thing twice, once for posts and once for archive and
+ * load the appropriate file - need to abstract that process in order to only have one function
+ * see: "does user have access"
+ */
+
+
 /**
  * registers custom post type for Workouts
  **/
@@ -74,7 +83,7 @@ function does_user_have_access() {
 			include_once( 'custom-fields-template.php' );
 		} else {
 			// Hide the post content if the user is not in the ACF "User" array
-			echo 'You do not have access to this post.  Please let Toby know if you do, indeed, need access.' . edit_post_link('Edit', '', ' ');
+			echo 'You do not have access to this post.  Please contact the ICWA if you do, indeed, need access.' . edit_post_link('Edit', '', ' ');
 		}
 	} else {
 		// Display something if a post has no users set
@@ -82,6 +91,35 @@ function does_user_have_access() {
 		die();
 	}
 
+}
+
+/**
+ * checks to see if user can view content for archive
+ */
+function does_user_have_access_archive() {
+
+	// Grab the current user's info so that we can compare it to the "allowed" users from the ACF "User" field later.
+	$current_user = wp_get_current_user();
+	//var_dump($current_user);
+
+	// Store the ACF "User" info
+	$values = get_field('user');
+
+	if($values) {
+		// Create an array of users that will be able to access the page from the ACF "User" field
+		$users_that_can_access_this_post = array();
+		foreach($values as $value) {
+			$user_IDs_that_can_access_this_post[] = $value['ID'];
+		}
+		// Check to see if the current user is in the "User" field's array
+		if (in_array($current_user->ID, $user_IDs_that_can_access_this_post, false) ) {
+			// Display the post
+			include( 'workouts-archive-template.php' );
+		} else {
+			// Hide the post content if the user is not in the ACF "User" array
+
+		}
+	}
 }
 
 /**
