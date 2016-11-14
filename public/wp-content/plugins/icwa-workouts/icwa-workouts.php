@@ -3,6 +3,7 @@
 Plugin Name: ICWA Workouts
 Description: Custom Post Types for Workouts functionality
 Author: Kimberly Keller
+Version: 1.0
 Author URI: http://www.kimberlyannkeller.com
 */
 
@@ -24,25 +25,17 @@ function workouts_cpt() {
 		'has_archive' => true,
 		'menu_position' => 20,
 		'menu_icon' => 'dashicons-admin-generic',
-			'map_meta_cap'        => true,
-			'capability_type'     => array('workout', 'workouts'),
+		'capability_type'     => 'workout',
+		'map_meta_cap'        => true,
 			'capabilities' => array(
-
-				// meta caps (don't assign these to roles)
 					'edit_post'              => 'edit_workout',
 					'read_post'              => 'read_workout',
 					'delete_post'            => 'delete_workout',
-
-				// primitive/meta caps
 					'create_posts'           => 'create_workouts',
-
-				// primitive caps used outside of map_meta_cap()
 					'edit_posts'             => 'edit_workouts',
 					'edit_others_posts'      => 'manage_workouts',
 					'publish_posts'          => 'manage_workouts',
 					'read_private_posts'     => 'read',
-
-				// primitive caps used inside of map_meta_cap()
 					'read'                   => 'read',
 					'delete_posts'           => 'manage_workouts',
 					'delete_private_posts'   => 'manage_workouts',
@@ -55,54 +48,41 @@ function workouts_cpt() {
 	));
 }
 
+
 /**
- * maps custom user capabilities
- **/
+ * checks to see if user can view content / acf fields
+ */
 
-add_filter( 'map_meta_cap', 'my_map_meta_cap', 10, 4 );
+function does_user_have_access() {
 
-function my_map_meta_cap( $caps, $cap, $user_id, $args ) {
+	// Grab the current user's info so that we can compare it to the "allowed" users from the ACF "User" field later.
+	$current_user = wp_get_current_user();
+	//var_dump($current_user);
 
-	/* If editing, deleting, or reading a workout, get the post and post type object. */
-	if ( 'edit_workout' == $cap || 'delete_workout' == $cap || 'read_workout' == $cap ) {
-		$post = get_post( $args[0] );
-		$post_type = get_post_type_object( $post->post_type );
+	// Store the ACF "User" info
+	$values = get_field('user');
 
-		/* Set an empty array for the caps. */
-		$caps = array();
+	if($values) {
+		// Create an array of users that will be able to access the page from the ACF "User" field
+		$users_that_can_access_this_post = array();
+		foreach($values as $value) {
+			$user_IDs_that_can_access_this_post[] = $value['ID'];
+		}
+		// Check to see if the current user is in the "User" field's array
+		if (in_array($current_user->ID, $user_IDs_that_can_access_this_post, false) ) {
+			// Display the post
+			include_once( 'custom-fields-template.php' );
+		} else {
+			// Hide the post content if the user is not in the ACF "User" array
+			echo 'You do not have access to this post.  Please let Toby know if you do, indeed, need access.' . edit_post_link('Edit', '', ' ');
+		}
+	} else {
+		// Display something if a post has no users set
+		echo 'Please set the user restriction on this post.' . edit_post_link('Edit', '', ' ');
+		die();
 	}
 
-	/* If editing a workout, assign the required capability. */
-	if ( 'edit_workout' == $cap ) {
-		if ( $user_id == $post->post_author )
-			$caps[] = $post_type->cap->edit_posts;
-		else
-			$caps[] = $post_type->cap->edit_others_posts;
-	}
-
-	/* If deleting a workout, assign the required capability. */
-	elseif ( 'delete_workout' == $cap ) {
-		if ( $user_id == $post->post_author )
-			$caps[] = $post_type->cap->delete_posts;
-		else
-			$caps[] = $post_type->cap->delete_others_posts;
-	}
-
-	/* If reading a private workout, assign the required capability. */
-	elseif ( 'read_workout' == $cap ) {
-
-		if ( 'private' != $post->post_status )
-			$caps[] = 'read';
-		elseif ( $user_id == $post->post_author )
-			$caps[] = 'read';
-		else
-			$caps[] = $post_type->cap->read_private_posts;
-	}
-
-	/* Return the capabilities required by the user. */
-	return $caps;
 }
-
 
 /**
  * Adds custom fields to user profiles

@@ -25,8 +25,18 @@ get_header();
 						?>
 
 						<div class="entry-content">
+
+							<?php if ( current_user_can( 'read_post', $post->ID ) ) : ?>
 							<?php the_title(); ?>
 						</div>
+
+						<?php	else :
+
+							// no layouts found
+
+						endif;
+
+						?>
 					<?php	} ?>
 				</div><!-- .entry-content -->
 			</article><!-- #post-## -->
