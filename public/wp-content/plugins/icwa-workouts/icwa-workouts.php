@@ -117,16 +117,15 @@ function does_user_have_access_archive() {
 			include( 'workouts-archive-template.php' );
 		} else {
 			// Hide the post content if the user is not in the ACF "User" array
-
 		}
 	}
 }
+
 
 /**
  * Adds custom fields to user profiles
  * In this case it adds fields for users to save their 1RMs for weightlifting
  */
-
 
 add_action( 'show_user_profile', 'add_custom_user_data' );
 add_action( 'edit_user_profile', 'add_custom_user_data' );
@@ -173,31 +172,10 @@ function save_custom_user_data( $user_id )
  * functions to call up user data for each lift
  */
 
-
-function get_custom_backsquat() {
-
-	$user_id = get_current_user_id();
-	$key = 'backsquat';
-	$single = true;
-	$user_last = get_user_meta( $user_id, $key, $single );
-	$user_updated = $user_last;
-	return $user_updated;
-}
-
-function get_custom_snatch() {
+function get_custom_movement($field) {
 
 	$user_id = get_current_user_id();
-	$key = 'snatch';
-	$single = true;
-	$user_last = get_user_meta( $user_id, $key, $single );
-	$user_updated = $user_last;
-	return $user_updated;
-}
-
-function get_custom_cleanjerk() {
-
-	$user_id = get_current_user_id();
-	$key = 'cleanjerk';
+	$key = $field;
 	$single = true;
 	$user_last = get_user_meta( $user_id, $key, $single );
 	$user_updated = $user_last;
@@ -206,11 +184,11 @@ function get_custom_cleanjerk() {
 
 
 
-function calculate_percentage() {
-	$backsquat = get_custom_backsquat();
-	$percent_backsquat = $backsquat*.6;
-	echo $percent_backsquat;
-}
+//function calculate_percentage() {
+//	$movement = get_custom_movement($field);
+//	$percent_rm = $movement*$onerm/100;
+//	return $percent_rm;
+//}
 
 /**
  * registers single template for custom post type
