@@ -134,21 +134,42 @@ function add_custom_user_data( $user )
 {
 	?>
 	<h3>One Rep Max</h3>
+	<p>Please enter your one rep max in kilograms</p>
 
 	<table class="form-table">
 		<tr>
 			<th><label for="backsquat">Back Squat</label></th>
-			<td><input type="text" name="backsquat" value="<?php echo esc_attr(get_the_author_meta( 'backsquat', $user->ID )); ?>" class="regular-text" /></td>
+			<td><input type="text" name="backsquat" value="<?php echo esc_attr(get_the_author_meta( 'backsquat', $user->ID )); ?>" class="regular-text" />kg</td>
 		</tr>
 
 		<tr>
 			<th><label for="cleanjerk">Clean & Jerk</label></th>
-			<td><input type="text" name="cleanjerk" value="<?php echo esc_attr(get_the_author_meta( 'cleanjerk', $user->ID )); ?>" class="regular-text" /></td>
+			<td><input type="text" name="cleanjerk" value="<?php echo esc_attr(get_the_author_meta( 'cleanjerk', $user->ID )); ?>" class="regular-text" />kg</td>
 		</tr>
 
 		<tr>
 			<th><label for="snatch">Snatch</label></th>
-			<td><input type="text" name="snatch" value="<?php echo esc_attr(get_the_author_meta( 'snatch', $user->ID )); ?>" class="regular-text" /></td>
+			<td><input type="text" name="snatch" value="<?php echo esc_attr(get_the_author_meta( 'snatch', $user->ID )); ?>" class="regular-text" />kg</td>
+		</tr>
+		<tr>
+			<th><label for="fontsquat">Front Squat</label></th>
+			<td><input type="text" name="frontsquat" value="<?php echo esc_attr(get_the_author_meta( 'frontsquat', $user->ID )); ?>" class="regular-text" />kg</td>
+		</tr>
+		<tr>
+			<th><label for="ohs">Overhead Squat</label></th>
+			<td><input type="text" name="ohs" value="<?php echo esc_attr(get_the_author_meta( 'ohs', $user->ID )); ?>" class="regular-text" />kg</td>
+		</tr>
+		<tr>
+			<th><label for="ohp">Overhead Press</label></th>
+			<td><input type="text" name="ohp" value="<?php echo esc_attr(get_the_author_meta( 'ohp', $user->ID )); ?>" class="regular-text" />kg</td>
+		</tr>
+		<tr>
+			<th><label for="bench">Bench Press</label></th>
+			<td><input type="text" name="bench" value="<?php echo esc_attr(get_the_author_meta( 'bench', $user->ID )); ?>" class="regular-text" />kg</td>
+		</tr>
+		<tr>
+			<th><label for="deadlift">Deadlift</label></th>
+			<td><input type="text" name="deadlift" value="<?php echo esc_attr(get_the_author_meta( 'deadlift', $user->ID )); ?>" class="regular-text" />kg</td>
 		</tr>
 	</table>
 	<?php
@@ -166,6 +187,11 @@ function save_custom_user_data( $user_id )
 	update_user_meta( $user_id,'backsquat', sanitize_text_field( $_POST['backsquat'] ) );
 	update_user_meta( $user_id,'cleanjerk', sanitize_text_field( $_POST['cleanjerk'] ) );
 	update_user_meta( $user_id,'snatch', sanitize_text_field( $_POST['snatch'] ) );
+	update_user_meta( $user_id,'frontsquat', sanitize_text_field( $_POST['frontsquat'] ) );
+	update_user_meta( $user_id,'ohs', sanitize_text_field( $_POST['ohs'] ) );
+	update_user_meta( $user_id,'ohp', sanitize_text_field( $_POST['ohp'] ) );
+	update_user_meta( $user_id,'bench', sanitize_text_field( $_POST['bench'] ) );
+	update_user_meta( $user_id,'deadlift', sanitize_text_field( $_POST['deadlift'] ) );
 }
 
 /**

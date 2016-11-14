@@ -18,218 +18,218 @@ endwhile;
 
 <?php if( have_rows('movements') ): ?>
 
-<?php	while ( have_rows('movements') ) : the_row(); ?>
+	<?php	while ( have_rows('movements') ) : the_row(); ?>
 
-<?php	if( get_row_layout() == 'based_on_backsquat' ):
+		<?php	if( get_row_layout() == 'based_on_backsquat' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'backsquat';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'backsquat';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
-<?php	elseif( get_row_layout() == 'based_on_snatch' ):
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
+		<?php	elseif( get_row_layout() == 'based_on_snatch' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'snatch';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'snatch';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_cleanjerk' ):
+		<?php	elseif( get_row_layout() == 'based_on_cleanjerk' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'cleanjerk';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'cleanjerk';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_frontsquat' ):
+		<?php	elseif( get_row_layout() == 'based_on_frontsquat' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'frontsquat';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'frontsquat';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_ohs' ):
+		<?php	elseif( get_row_layout() == 'based_on_ohs' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'ohs';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'ohs';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_ohp' ):
+		<?php	elseif( get_row_layout() == 'based_on_ohp' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'ohp';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'ohp';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_bench' ):
+		<?php	elseif( get_row_layout() == 'based_on_bench' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'bench';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'bench';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	elseif( get_row_layout() == 'based_on_deadlift' ):
+		<?php	elseif( get_row_layout() == 'based_on_deadlift' ):
 
-$name = get_sub_field('name');
-$sets = get_sub_field('sets');
-$reps = get_sub_field('reps');
-$onerm = get_sub_field('%_of_1rm');
+			$name = get_sub_field('name');
+			$sets = get_sub_field('sets');
+			$reps = get_sub_field('reps');
+			$onerm = get_sub_field('%_of_1rm');
 
-$field = 'deadlift';
-$movement = get_custom_movement($field);
-$percent_rm = $movement*$onerm/100;
-?>
+			$field = 'deadlift';
+			$movement = get_custom_movement($field);
+			$percent_rm = $movement*$onerm/100;
+			?>
 
-<h2><?php echo $name; ?></h2>
-<table>
-	<tr>
-		<th>sets</th>
-		<th>reps</th>
-		<th>kg</th>
-	</tr>
-	<tr>
-		<td><h2><?php echo $sets; ?> sets</h2></td>
-		<td><h2><?php echo $reps; ?> reps</h2></td>
-		<td><h2><?php echo $percent_rm; ?> kg</h2></td>
-	</tr>
-</table>
+			<h2><?php echo $name; ?></h2>
+			<table>
+				<tr>
+					<th>sets</th>
+					<th>reps</th>
+					<th>kg</th>
+				</tr>
+				<tr>
+					<td><h2><?php echo $sets; ?> sets</h2></td>
+					<td><h2><?php echo $reps; ?> reps</h2></td>
+					<td><h2><?php echo $percent_rm; ?> kg</h2></td>
+				</tr>
+			</table>
 
-<?php	endif; ?>
+		<?php	endif; ?>
 
-<?php endwhile; ?>
+	<?php endwhile; ?>
 
 <?php	else :
 
