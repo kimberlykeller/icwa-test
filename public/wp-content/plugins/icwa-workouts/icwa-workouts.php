@@ -15,12 +15,27 @@ Author URI: http://www.kimberlyannkeller.com
  * see: "does user have access"
  */
 
+/**
+ * Adds custom fields to user profiles
+ * In this case it adds fields for users to save their 1RMs for weightlifting
+ */
+
+/**
+ * adds actions
+ **/
+
+add_action( 'init', 'workouts_cpt' );
+
+add_action( 'show_user_profile', 'add_custom_user_data' );
+add_action( 'edit_user_profile', 'add_custom_user_data' );
+
+add_action( 'personal_options_update', 'save_custom_user_data' );
+add_action( 'edit_user_profile_update', 'save_custom_user_data' );
 
 /**
  * registers custom post type for Workouts
  **/
 
-add_action( 'init', 'workouts_cpt' );
 
 function workouts_cpt() {
 
@@ -32,9 +47,9 @@ function workouts_cpt() {
 		'description' => 'Individual workouts for ICWA members.',
 		'public' => true,
 		'has_archive' => true,
-		'menu_position' => 20,
+		'menu_position' => '',
 		'menu_icon' => 'dashicons-admin-generic',
-		'capability_type'     => 'workout',
+		'capability_type'     => 'post',
 		'map_meta_cap'        => true,
 			'capabilities' => array(
 					'edit_post'              => 'edit_workout',
@@ -56,6 +71,7 @@ function workouts_cpt() {
 		'supports' => array( 'title', 'editor', 'custom-fields' )
 	));
 }
+
 
 
 /**
@@ -122,13 +138,6 @@ function does_user_have_access_archive() {
 }
 
 
-/**
- * Adds custom fields to user profiles
- * In this case it adds fields for users to save their 1RMs for weightlifting
- */
-
-add_action( 'show_user_profile', 'add_custom_user_data' );
-add_action( 'edit_user_profile', 'add_custom_user_data' );
 
 function add_custom_user_data( $user )
 {
@@ -178,9 +187,6 @@ function add_custom_user_data( $user )
 /**
  * Saves the custom fields
  */
-
-add_action( 'personal_options_update', 'save_custom_user_data' );
-add_action( 'edit_user_profile_update', 'save_custom_user_data' );
 
 function save_custom_user_data( $user_id )
 {
@@ -244,6 +250,47 @@ function get_workout_archive_template( $archive_template ) {
 }
 
 add_filter( 'archive_template', 'get_workout_archive_template' ) ;
+
+
+/**
+ * add acf to plugin and hide admin options
+ */
+
+//// 1. customize ACF path
+//add_filter('acf/settings/path', 'my_acf_settings_path');
+//
+//function my_acf_settings_path( $path ) {
+//
+//	// update path
+//	$path = plugin_dir_path( __FILE__ ) . '/acf/';
+//
+//	// return
+//	return $path;
+//
+//}
+//
+//
+//// 2. customize ACF dir
+//add_filter('acf/settings/dir', 'my_acf_settings_dir');
+//
+//function my_acf_settings_dir( $dir ) {
+//
+//	// update path
+//	$dir = plugin_dir_path( __FILE__ ) . '/acf/';
+//
+//	// return
+//	return $dir;
+//
+//}
+//
+//
+//// 3. Hide ACF field group menu item
+////add_filter('acf/settings/show_admin', '__return_false');
+//
+//
+//// 4. Include ACF
+//include_once( 'acf/acf.php' );
+
 
 
 
