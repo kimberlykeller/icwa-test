@@ -5,7 +5,8 @@ get_header();
 
 <?php if ( have_posts() ) : ?>
 
-	<h1>All Workouts</h1>
+	<h1 class="archive-title">All Workouts</h1>
+
 
 <?php while ( have_posts() ) : the_post();
 
@@ -14,6 +15,7 @@ get_header();
 endwhile; ?>
 
 <?php endif; ?>
+
 
 
 <?php wp_footer(); ?>

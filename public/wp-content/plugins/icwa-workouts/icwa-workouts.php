@@ -15,22 +15,35 @@ Author URI: http://www.kimberlyannkeller.com
  * see: "does user have access"
  */
 
-/**
- * Adds custom fields to user profiles
- * In this case it adds fields for users to save their 1RMs for weightlifting
- */
-
+define('ICWA_WORKOUTS_PLUGIN_URL', plugin_dir_path( __FILE__ ));
 /**
  * adds actions
  **/
 
 add_action( 'init', 'workouts_cpt' );
 
+add_action( 'wp_enqueue_scripts', 'icwa_workouts_styles' );
+
 add_action( 'show_user_profile', 'add_custom_user_data' );
 add_action( 'edit_user_profile', 'add_custom_user_data' );
 
 add_action( 'personal_options_update', 'save_custom_user_data' );
 add_action( 'edit_user_profile_update', 'save_custom_user_data' );
+
+
+/**
+ * icwa-workouts add the requiered stylesheets to the project
+ */
+function icwa_workouts_styles() {
+
+	wp_enqueue_style('icwa_workouts_main_css', '/wp-content/plugins/icwa-workouts/style.css');
+}
+
+/**
+ * include local fields
+ **/
+
+include_once ('acf-custom-workout-fields.php');
 
 /**
  * registers custom post type for Workouts
@@ -50,24 +63,6 @@ function workouts_cpt() {
 		'menu_position' => '',
 		'menu_icon' => 'dashicons-admin-generic',
 		'capability_type'     => 'post',
-		'map_meta_cap'        => true,
-			'capabilities' => array(
-					'edit_post'              => 'edit_workout',
-					'read_post'              => 'read_workout',
-					'delete_post'            => 'delete_workout',
-					'create_posts'           => 'create_workouts',
-					'edit_posts'             => 'edit_workouts',
-					'edit_others_posts'      => 'manage_workouts',
-					'publish_posts'          => 'manage_workouts',
-					'read_private_posts'     => 'read',
-					'read'                   => 'read',
-					'delete_posts'           => 'manage_workouts',
-					'delete_private_posts'   => 'manage_workouts',
-					'delete_published_posts' => 'manage_workouts',
-					'delete_others_posts'    => 'manage_workouts',
-					'edit_private_posts'     => 'edit_workouts',
-					'edit_published_posts'   => 'edit_workouts'
-			),
 		'supports' => array( 'title', 'editor', 'custom-fields' )
 	));
 }

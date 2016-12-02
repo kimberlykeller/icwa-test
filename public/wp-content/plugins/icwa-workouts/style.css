@@ -1,0 +1,35 @@
+.workouts {
+	margin: 30px;
+
+}
+
+.workouts-archive {
+	margin: 20px 0;
+}
+
+.workouts-archive a {
+	text-decoration: none;
+}
+
+.custom-workouts h2 {
+	padding: 0px 15px;
+	margin: 20px 0px;
+
+}
+
+.workouts-title {
+	margin: 20px;
+}
+
+.archive-title {
+	margin: 20px 0px;
+
+}
+
+.archive-link {
+	margin: 20px 0px;
+}
+
+td {
+	padding: 0px 15px;
+}

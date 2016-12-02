@@ -6,7 +6,7 @@
  */
 ?>
 
-
+<div class ="custom-workouts">
 <?php while ( have_posts() ) : the_post();
 
 	// Include the single post content template.
@@ -240,3 +240,5 @@ endif;
 ?>
 
 <?php // endif; ?>
+
+</div>
